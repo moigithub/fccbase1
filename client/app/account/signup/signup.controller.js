@@ -16,7 +16,7 @@ angular.module('base0App')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          $location.path('/votes');
         })
         .catch( function(err) {
           err = err.data;

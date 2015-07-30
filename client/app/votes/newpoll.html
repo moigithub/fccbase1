@@ -1,0 +1,34 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>Dashboard</h1>
+    <p class="lead">What ya wanna do today?</p>
+    <a class ="btn btn-lg btn-success" href="/votes/newpoll">New Poll</a>
+    <a class ="btn btn-lg btn-primary" href="/votes/mypolls">My Polls</a>
+  </div>
+</header>
+
+<div class="container">
+	<div id="newPollForm">
+		<h2>New Poll</h2>
+		<form name="poll" ng-controller="VotesCtrl" novalidate>
+			<label for="name">Name your poll</label>
+			<input type="text" ng-model="pollName" placeholder="What's your favorite brand?" required>
+
+			<label>Options</label>
+			<input type="text" ng-model="pollOptions[$index]" placeholder="{{placeholders[$index]}}" ng-repeat="n in placeholders track by $index" required>
+
+			<button type="button" ng-click="newOption()" class="btn btn-default">More Options</button>
+			<button type="submit" ng-click="submit()" ng-disabled="poll.$invalid" class="btn btn-success">Submit</button>
+		</form>
+	</div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+      <p>Angular Fullstack v2.1.0 |
+        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
+         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+  </div>
+</footer>
