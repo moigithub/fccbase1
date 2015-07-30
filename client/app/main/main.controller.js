@@ -1,8 +1,15 @@
 'use strict';
 
 angular.module('base0App')
-  .controller('MainCtrl', function ($scope, $http) {
-    $scope.awesomeThings = [];
+  .controller('MainCtrl', function ($scope, $http, Auth, $location) {
+    //$scope.awesomeThings = [];
+
+    // if user already logged in.. redirect to  /votes
+    var loggedIn = Auth.isLoggedIn();
+    console.log(loggedIn);
+    if (loggedIn) {
+      $location.path('/votes');
+    }
 /*
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;

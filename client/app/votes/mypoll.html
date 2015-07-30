@@ -13,7 +13,7 @@
 	<div id="poll-list">
 		<h2>My Polls {{getCurrentUser._id}}</h2>
 		<ul>
-			<li ng-repeat="poll in polls">{{poll.pollName}} {{poll}}<span><a  href="#">Delete</a> </span></li>
+			<li ng-repeat="poll in polls"><a href="/votes/viewpoll/{{poll._id}}">{{poll.pollName}}</a> {{poll}}<span><a  href="#">Delete</a> </span></li>
 		</ul>
 	</div>
 </div>

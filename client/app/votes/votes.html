@@ -13,7 +13,7 @@
 	<div id="poll-list">
 		<h2>All Polls</h2>
 		<ul>
-			<li ng-repeat="poll in polls">{{poll.createdBy}} - <a href="#">{{poll.pollName}}</a>{{poll.Option}} {{poll}}</li>
+			<li ng-repeat="poll in polls">{{poll.createdBy}} - <a href="/votes/viewpoll/{{poll._id}}">{{poll.pollName}}</a>{{poll.Option}} {{poll}}</li>
 		</ul>
 	</div>
 </div>

@@ -14,5 +14,11 @@ angular.module('base0App')
       .when('/votes/newpoll', { // create new poll
         templateUrl: 'app/votes/newpoll.html',
         controller: 'newpollVotesCtrl'
-      });
+      })
+      .when('/votes/viewpoll/:id', { // create new poll
+        templateUrl: 'app/votes/viewpoll.html',
+        controller: 'viewPollVotesCtrl'
+      })
+
+      ;
   });

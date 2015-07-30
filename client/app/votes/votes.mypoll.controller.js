@@ -18,7 +18,6 @@ angular.module('base0App')
    	$http.get('/api/votes/uid/' + $scope.getCurrentUser._id )
     .success(function(data){
         $scope.polls=data;
-        console.log(data);
     })
     .error(function(data, status) {
         $scope.error=status;

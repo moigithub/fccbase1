@@ -4,7 +4,7 @@ angular.module('base0App')
   .controller('newpollVotesCtrl', function ($scope, $http, $location, Auth) {
     $scope.placeholders = ["Pepsi", "Coca-cola"];
     $scope.pollOptions=[];
-    $scope.pollName="texto";
+    $scope.pollName="";
     
     $scope.getCurrentUser = Auth.getCurrentUser();
 //console.log(JSON.stringify($scope.getCurrentUser));
