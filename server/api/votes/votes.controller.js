@@ -43,7 +43,11 @@ exports.update = function(req, res) {
   Votes.findById(req.params.id, function (err, votes) {
     if (err) { return handleError(res, err); }
     if(!votes) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(votes, req.body);
+    //var updated = _.merge(votes, req.body);
+    var updated = _.extend(votes, req.body);
+    //////////////////////
+    console.log("server update, after _merge", updated);
+
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(votes);
