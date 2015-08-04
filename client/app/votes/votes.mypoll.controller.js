@@ -8,7 +8,7 @@ router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 */
 angular.module('base0App')
-  .controller('mypollVotesCtrl', function ($scope, $http, Auth) {  //$location, 
+  .controller('mypollVotesCtrl', function ($scope, $http, $location, Auth) { 
     $scope.polls=[];
     $scope.error=null;
 
@@ -25,7 +25,15 @@ angular.module('base0App')
 
 
     $scope.delete = function(pollId){
-        $http.delete('/api/votes/' + pollId);
+        $http.delete('/api/votes/' + pollId)
+        .success(function(res,err){
+            console.log("polls", $scope.polls);
+            //getUserPoll(); 
+            var pollLeft = $scope.polls.filter(function(poll){
+                return poll._id !== pollId;
+            });
+            $scope.polls = pollLeft;
+          });
         // redirect to /votes/mypoll to refresh the list ???
     }
 
