@@ -24,7 +24,9 @@ angular.module('base0App')
     })
 
 
-    $scope.delete = function(pollId){
+    $scope.delete = function(poll){
+        var pollId = poll._id;
+        //console.log("delete pollID:",pollId);
         $http.delete('/api/votes/' + pollId)
         .success(function(res,err){
             console.log("polls", $scope.polls);
