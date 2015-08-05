@@ -11,6 +11,7 @@
 
 <div class="container">
 	<div id="newPollForm">
+		<div ng-show="pollExist" class="alert alert-danger">Poll Name already exists, pick new one!</div>
 		<h2>New Poll</h2>
 		<form name="poll" novalidate>
 			<label for="name">Name your poll</label>

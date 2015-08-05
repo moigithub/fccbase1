@@ -3,6 +3,16 @@
 var _ = require('lodash');
 var Votes = require('./votes.model');
 
+///api/votes/pollname/"+$scope.pollName)
+exports.findbyName = function(req, res){
+  Votes.find({"pollName":req.params.pollName}, function (err, votes) {
+    if(err) { return handleError(res, err); }
+    if(!votes) { return res.status(404).send('Not Found'); }
+    return res.json(votes);
+  });
+}
+
+
 // get list by user id
 exports.findbyuid = function(req, res){
   Votes.find({"createdBy":req.params.uid}, function (err, votes) {
