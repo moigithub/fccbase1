@@ -36,7 +36,7 @@ angular.module('base0App')
 // show poll link
 // instead of redirect
             $location.path("/votes/mypolls");
-            $scope.$apply();
+            //$scope.$apply();
           }).
           error(function(data, status, headers, config) {
             // called asynchronously if an error occurs

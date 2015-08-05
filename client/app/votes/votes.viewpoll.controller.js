@@ -7,8 +7,8 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 */
-angular.module('base0App')  //, ['chart.js']
-  .controller('viewPollVotesCtrl', function ($scope, $http, $routeParams, Auth) {  //$location, 
+angular.module('base0App')  //, 
+  .controller('viewPollVotesCtrl', [ '$scope', '$http', '$routeParams', 'Auth' ,function ($scope, $http, $routeParams, Auth) {  //$location, 
     $scope.polls={"pollOptions":[],
                   "usersVote":[],
                   "pollName":"",
@@ -20,14 +20,12 @@ angular.module('base0App')  //, ['chart.js']
     $scope.getCurrentUser = Auth.getCurrentUser();
 
 ///////// chartjs
-/*
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    //$scope.series = ['Series A', 'Series B'];
-    $scope.data = [
-      [65, 59, 80, 81, 56, 55, 40],
-      [28, 48, 40, 19, 86, 27, 90]
-    ];
 
+    $scope.labels = ["chart"];
+    //$scope.series = ['Series A', 'Series B'];
+    $scope.data = [0];
+
+/*
     $scope.onClick = function (points, evt) {
       console.log(points, evt);
     };
@@ -38,22 +36,25 @@ angular.module('base0App')  //, ['chart.js']
     $http.get('/api/votes/' + $routeParams.id)
     .success(function(data){
         $scope.polls=data;
+        //console.log("data", data);
         // chart data
         $scope.labels = $scope.polls.pollOptions;
         
 
-        console.log("Options: ",data.pollOptions);
+        //console.log("Options: ",data.pollOptions);
         //$scope.data   = $scope.polls.usersVote;
 
         // count votes for each poll
-        /*
+        
         $scope.data   = data.pollOptions.map(function(option){
           return data.usersVote.filter(function(vote){ 
-            return vote.pollName===option;
+          //  console.log(vote.pollName," : ",option, vote);
+            return vote.pollOption===option;
           }).length;
         });
-        */
-        console.log("data", $scope.data);
+        
+
+        //console.log("scope data", $scope.data);
 /*
         {"uid": $scope.getCurrentUser._id, 
         "pollName":$scope.choice.vote}
@@ -81,8 +82,8 @@ angular.module('base0App')  //, ['chart.js']
         });
 
 
-        votes.push({"uid": $scope.getCurrentUser._id, "pollName":$scope.choice.vote});
-        console.log(votes);
+        votes.push({"uid": $scope.getCurrentUser._id, "pollOption":$scope.choice.vote});
+        //console.log(votes);
 
         // update userVotes
         $scope.polls["usersVote"] = votes;
@@ -95,16 +96,16 @@ angular.module('base0App')  //, ['chart.js']
         success(function(data, status, headers, config) {
           // this callback will be called asynchronously
           // when the response is available
-          console.log("put OK", status, headers,data);
+          //console.log("put OK", status, headers,data);
         }).
         error(function(data, status, headers, config) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
-          console.log("error ", status, headers);
+          //console.log("error ", status, headers);
         });
         
     }
-  });
+  }]);
 /*
     $scope.delete = function(pollId){
         $http.delete('/api/votes/' + pollId);
