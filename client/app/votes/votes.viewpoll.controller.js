@@ -18,6 +18,7 @@ angular.module('base0App')  //,
     $scope.choice={};
 
     $scope.getCurrentUser = Auth.getCurrentUser();
+    $scope.isLoggedIn = Auth.isLoggedIn;
 
 ///////// chartjs
 
@@ -30,7 +31,16 @@ angular.module('base0App')  //,
       console.log(points, evt);
     };
 */
+    var calcVotes = function(data){
+      return data.pollOptions.map(function(option){
+          return data.usersVote.filter(function(vote){ 
+          //  console.log(vote.pollName," : ",option, vote);
+            return vote.pollOption===option;
+          }).length;
+        }); 
+    }
 /////////// fin chart js
+
 
 
     $http.get('/api/votes/' + $routeParams.id)
@@ -46,12 +56,7 @@ angular.module('base0App')  //,
 
         // count votes for each poll
         
-        $scope.data   = data.pollOptions.map(function(option){
-          return data.usersVote.filter(function(vote){ 
-          //  console.log(vote.pollName," : ",option, vote);
-            return vote.pollOption===option;
-          }).length;
-        });
+        $scope.data   = calcVotes(data);
         
 
         //console.log("scope data", $scope.data);
@@ -97,6 +102,7 @@ angular.module('base0App')  //,
           // this callback will be called asynchronously
           // when the response is available
           //console.log("put OK", status, headers,data);
+          $scope.data   = calcVotes(data);
         }).
         error(function(data, status, headers, config) {
           // called asynchronously if an error occurs

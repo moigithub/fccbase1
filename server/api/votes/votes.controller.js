@@ -56,7 +56,7 @@ exports.update = function(req, res) {
     //var updated = _.merge(votes, req.body);
     var updated = _.extend(votes, req.body);
     //////////////////////
-    console.log("server update, after _merge", updated);
+    //console.log("server update, after _merge", updated);
 
     updated.save(function (err) {
       if (err) { return handleError(res, err); }

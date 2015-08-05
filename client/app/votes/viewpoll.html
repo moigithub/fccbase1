@@ -10,29 +10,35 @@
 </header>
 
 <div class="container">
-	<div id="newPollForm">
-		{{polls}}
-		<h2>{{polls.pollName}}</h2>
-		
-		<h3>Options</h3>
-		<form name="voteForm" novalidate>
-		<ul>
-			<li ng-repeat="option in polls.pollOptions">
-				<label for="{{'vote_'+$index}}">{{option}}</label>
-				<input ng-model="choice.vote" id="{{'vote_'+$index}}" name="choice" type="radio" value="{{option}}">
-			</li>
-		</ul>
-		<button type="submit" ng-click="submit()" ng-disabled="validChoice()" class="btn btn-lg btn-success">Vote</button>
-		</form>
-		{{choice}}
-		<h3>Votes</h3>
-		<ul>
-			<li ng-repeat="vote in polls.usersVote">{{vote}}</li>
-		</ul>
-	</div>
-	<div>
- 		<canvas id="pie" class="chart chart-pie" data="data"
-  labels="labels"></canva
+	{{polls}}
+	<h2>{{polls.pollName}}</h2>
+	
+	<div class="row">
+		<div class="col-md-6">
+			<div id="newPollForm" ng-show="isLoggedIn()">
+				<h3>Options</h3>
+				<form name="voteForm" novalidate>
+				<ul>
+					<li ng-repeat="option in polls.pollOptions">
+						<label for="{{'vote_'+$index}}">{{option}}</label>
+						<input ng-model="choice.vote" id="{{'vote_'+$index}}" name="choice" type="radio" value="{{option}}">
+					</li>
+				</ul>
+				<button type="submit" ng-click="submit()" ng-disabled="validChoice()" class="btn btn-lg btn-success">Vote</button>
+				</form>
+				{{choice}}
+				<h3>Votes</h3>
+				<ul>
+					<li ng-repeat="vote in polls.usersVote">{{vote}}</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div>
+		 		<canvas id="pie" class="chart chart-pie" data="data"
+		  labels="labels"></canvas>
+			</div>
+		</div>
 	</div>
 </div>
 
