@@ -16,16 +16,18 @@
 	
 	<div class="row">
 		<div class="col-md-6">
-			<div id="newPollForm" ng-show="loggedIn">
+			<div id="newPollForm">
 				<h3>Options</h3>
 				<form name="voteForm" novalidate>
-				<ul>
-					<li ng-repeat="option in polls.pollOptions">
-						<label for="{{'vote_'+$index}}">{{option}}</label>
-						<input ng-model="choice.vote" id="{{'vote_'+$index}}" name="choice" type="radio" value="{{option}}">
-					</li>
-				</ul>
-				<button type="submit" ng-click="submit()" ng-disabled="validChoice()" class="btn btn-lg btn-success">Vote</button>
+					<fieldset ng-disabled="loggedIn">
+						<ul>
+							<li ng-repeat="option in polls.pollOptions">
+								<label for="{{'vote_'+$index}}">{{option}}</label>
+								<input ng-model="choice.vote" id="{{'vote_'+$index}}" name="choice" type="radio" value="{{option}}">
+							</li>
+						</ul>
+						<button type="submit" ng-click="submit()" ng-disabled="validChoice()" class="btn btn-lg btn-success">Vote</button>
+					</fieldset>
 				</form>
 				{{choice}}
 				<h3>Votes</h3>
