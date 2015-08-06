@@ -4,8 +4,9 @@
   <div class="container">
     <h1>Dashboard</h1>
     <p class="lead">What ya wanna do today?</p>
-    <a class ="btn btn-lg btn-success" href="/votes/newpoll">New Poll</a>
-    <a class ="btn btn-lg btn-primary" href="/votes/mypolls">My Polls</a>
+    <a class ="btn btn-lg btn-primary" href="/votes">All Votes</a>
+    <a class ="btn btn-lg btn-success" ng-show="loggedIn" href="/votes/newpoll">New Poll</a>
+    <a class ="btn btn-lg btn-primary" ng-show="loggedIn" href="/votes/mypolls">My Polls</a>
   </div>
 </header>
 

@@ -8,6 +8,7 @@ angular.module('base0App')
     $scope.pollExist=false;
     
     $scope.getCurrentUser = Auth.getCurrentUser();
+    $scope.loggedIn = Auth.isLoggedIn();
 //console.log(JSON.stringify($scope.getCurrentUser));
 
     $scope.newOption= function(){

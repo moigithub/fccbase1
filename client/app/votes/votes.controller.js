@@ -13,7 +13,7 @@ angular.module('base0App')
     $scope.error=null;
 
     //$scope.getCurrentUser = Auth.getCurrentUser;
-
+    $scope.loggedIn = Auth.isLoggedIn();
 
     $http.get('/api/votes/' )
     .success(function(data){

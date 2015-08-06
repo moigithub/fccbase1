@@ -18,7 +18,7 @@ angular.module('base0App')  //,
     $scope.choice={};
 
     $scope.getCurrentUser = Auth.getCurrentUser();
-    $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.loggedIn = Auth.isLoggedIn();
 
 ///////// chartjs
 
