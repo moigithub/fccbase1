@@ -35,6 +35,7 @@ angular.module('base0App')
 
 // show poll link
 // instead of redirect
+            event.preventDefault();
             $location.path("/votes/mypolls");
             //$scope.$apply();
           }).
