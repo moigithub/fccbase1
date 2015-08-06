@@ -13,13 +13,13 @@
 <div class="container">
 	{{polls}}
 	<h2>{{polls.pollName}}</h2>
-	
+	{{loggedIn}}
 	<div class="row">
 		<div class="col-md-6">
 			<div id="newPollForm">
 				<h3>Options</h3>
 				<form name="voteForm" novalidate>
-					<fieldset ng-disabled="loggedIn">
+					<fieldset ng-disabled="!loggedIn">
 						<ul>
 							<li ng-repeat="option in polls.pollOptions">
 								<label for="{{'vote_'+$index}}">{{option}}</label>
