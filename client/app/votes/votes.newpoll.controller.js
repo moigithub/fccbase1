@@ -20,6 +20,9 @@ angular.module('base0App')
 
     $scope.removeOption= function(index){
       $scope.placeholders.splice(index,1);
+      if($scope.pollOptions[index]) 
+        $scope.pollOptions.splice(index,1);
+      
       // dont allow delete last pollOption
       $scope.minPollOpt = $scope.placeholders.length === 1;
     }
