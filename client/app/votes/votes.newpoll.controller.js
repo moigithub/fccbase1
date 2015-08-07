@@ -13,15 +13,16 @@ angular.module('base0App')
 //console.log(JSON.stringify($scope.getCurrentUser));
 
     $scope.newOption= function(){
-      $scope.placeholders.push("new Poll");
+      $scope.placeholders.push("new Poll option");
       // dont allow delete last pollOption
       $scope.minPollOpt = $scope.placeholders.length === 1;
     }
 
     $scope.removeOption= function(index){
       $scope.placeholders.splice(index,1);
-      if($scope.pollOptions.length>=index) 
+      if($scope.pollOptions.length>=index) {
         $scope.pollOptions.splice(index,1);
+      }
 
       // dont allow delete last pollOption
       $scope.minPollOpt = $scope.placeholders.length === 1;
