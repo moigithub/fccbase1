@@ -5,9 +5,9 @@ angular.module('base0App')
     //$scope.awesomeThings = [];
 
     // if user already logged in.. redirect to  /votes
-    var loggedIn = Auth.isLoggedIn();
-    console.log(loggedIn);
-    if (loggedIn) {
+    $scope.loggedIn = Auth.isLoggedIn();
+    
+    if ($scope.loggedIn) {
       $location.path('/votes');
     }
 /*
