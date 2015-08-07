@@ -25,6 +25,7 @@ angular.module('base0App')  //,
     $scope.labels = ["chart"];
     //$scope.series = ['Series A', 'Series B'];
     $scope.data = [0];
+    //$scope.type = 'Pie';
 
 /*
     $scope.onClick = function (points, evt) {
