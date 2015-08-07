@@ -19,7 +19,10 @@
 			<input type="text" ng-model="pollName" placeholder="What's your favorite brand?" required>
 
 			<label>Options</label>
-			<input type="text" ng-model="pollOptions[$index]" placeholder="{{placeholders[$index]}}" ng-repeat="n in placeholders track by $index" required>
+			<div ng-repeat="n in placeholders track by $index" >
+				<input type="text" ng-model="pollOptions[$index]" placeholder="{{placeholders[$index]}}" required> 
+				<a href="#" ng-hide="minPollOpt" ng-click="removeOption($index)">Remove</a>
+			</div>
 
 			<button type="button" ng-click="newOption()" class="btn btn-default">More Options</button>
 			<button type="submit" ng-click="submit()" ng-disabled="poll.$invalid" class="btn btn-success">Submit</button>

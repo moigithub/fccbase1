@@ -6,6 +6,7 @@ angular.module('base0App')
     $scope.pollOptions=[];
     $scope.pollName="";
     $scope.pollExist=false;
+    $scope.minPollOpt = false;
     
     $scope.getCurrentUser = Auth.getCurrentUser();
     $scope.loggedIn = Auth.isLoggedIn();
@@ -13,8 +14,15 @@ angular.module('base0App')
 
     $scope.newOption= function(){
       $scope.placeholders.push("new Poll");
+      // dont allow delete last pollOption
+      $scope.minPollOpt = $scope.placeholders.length === 1;
     }
 
+    $scope.removeOption= function(index){
+      $scope.placeholders.splice(index,1);
+      // dont allow delete last pollOption
+      $scope.minPollOpt = $scope.placeholders.length === 1;
+    }
 
     $scope.submit = function(){
       //check for duplicate names poll

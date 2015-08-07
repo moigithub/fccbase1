@@ -13,7 +13,7 @@
 <div class="container">
 	{{polls}}
 	<h2>{{polls.pollName}}</h2>
-	{{loggedIn}}
+	<div ng-hide="loggedIn"><a href="/login">Login</a> to vote</div>
 	<div class="row">
 		<div class="col-md-6">
 			<div id="newPollForm">
