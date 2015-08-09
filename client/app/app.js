@@ -6,7 +6,8 @@ angular.module('base0App', [
   'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
-  'chart.js'
+  'chart.js',
+  'ngConfirm'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
