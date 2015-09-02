@@ -1,30 +1,26 @@
 'use strict';
-
-angular.module('base0App')
-  .controller('MainCtrl', function ($scope, $http, Auth, $location) {
-    //$scope.awesomeThings = [];
-
-    // if user already logged in.. redirect to  /votes
-    $scope.loggedIn = Auth.isLoggedIn();
-    
-    if ($scope.loggedIn) {
-      $location.path('/votes');
-    }
 /*
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-    });
-
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
+router.get('/', controller.index);
+router.get('/:id', controller.show);
+router.post('/', controller.create);
+router.put('/:id', controller.update);
+router.patch('/:id', controller.update);
+router.delete('/:id', controller.destroy);
 */
+angular.module('base0App')
+  .controller('MainCtrl', function ($scope, $http, Auth) {  //$location, 
+    $scope.polls=[];
+    $scope.error=null;
+
+    //$scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.loggedIn = Auth.isLoggedIn;
+
+    $http.get('/api/votes/' )
+    .success(function(data){
+        $scope.polls=data;
+    })
+    .error(function(data, status) {
+        $scope.error=status;
+    })
+
   });

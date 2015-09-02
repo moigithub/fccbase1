@@ -18,7 +18,7 @@ angular.module('base0App')  //,
     $scope.choice={};
 
     $scope.getCurrentUser = Auth.getCurrentUser();
-    $scope.loggedIn = Auth.isLoggedIn();
+    $scope.loggedIn = Auth.isLoggedIn;
 
 ///////// chartjs
 
@@ -58,7 +58,9 @@ angular.module('base0App')  //,
         // count votes for each poll
         
         $scope.data   = calcVotes(data);
-        
+        $scope.choice.vote = data["usersVote"].filter(function(vote){
+          return vote.uid === $scope.getCurrentUser._id;
+        })[0]["pollOption"];
 
         //console.log("scope data", $scope.data);
 /*

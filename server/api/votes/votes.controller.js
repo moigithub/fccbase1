@@ -5,7 +5,12 @@ var Votes = require('./votes.model');
 
 ///api/votes/pollname/"+$scope.pollName)
 exports.findbyName = function(req, res){
-  Votes.find({"pollName":req.params.pollName}, function (err, votes) {
+  Votes.find({"pollName":req.params.pollName})
+    .populate({
+      path:'createdBy',
+      select: 'name'
+    })
+    .exec(function (err, votes) {
     if(err) { return handleError(res, err); }
     if(!votes) { return res.status(404).send('Not Found'); }
     return res.json(votes);
@@ -15,7 +20,12 @@ exports.findbyName = function(req, res){
 
 // get list by user id
 exports.findbyuid = function(req, res){
-  Votes.find({"createdBy":req.params.uid}, function (err, votes) {
+  Votes.find({"createdBy":req.params.uid})
+    .populate({
+      path:'createdBy',
+      select: 'name'
+    })
+    .exec(function (err, votes) {
     if(err) { return handleError(res, err); }
     if(!votes) { return res.status(404).send('Not Found'); }
     return res.json(votes);
@@ -24,15 +34,26 @@ exports.findbyuid = function(req, res){
 
 // Get list of votess
 exports.index = function(req, res) {
-  Votes.find(function (err, votess) {
+  Votes.find()
+    .populate({
+      path:'createdBy',
+      select: 'name'
+    })
+    .exec(function (err, votess) {
     if(err) { return handleError(res, err); }
+//    console.log("votes index",votess);
     return res.status(200).json(votess);
   });
 };
 
 // Get a single votes
 exports.show = function(req, res) {
-  Votes.findById(req.params.id, function (err, votes) {
+  Votes.findById(req.params.id)
+    .populate({
+      path:'createdBy',
+      select: 'name'
+    })
+    .exec(function (err, votes) {
     if(err) { return handleError(res, err); }
     if(!votes) { return res.status(404).send('Not Found'); }
     return res.json(votes);
