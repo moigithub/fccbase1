@@ -1,5 +1,6 @@
 'use strict';
 
+SettingsCtrl.$inject=['$scope', 'User', 'Auth'];
 angular.module('base0App')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};

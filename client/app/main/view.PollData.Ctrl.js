@@ -1,5 +1,6 @@
 'use strict';
 
+viewPollDataCtrl.$inject=['$scope', '$http', '$modalInstance', '$routeParams', 'Auth', 'PollData'];
 angular.module('base0App')  //, 
   .controller('viewPollDataCtrl', 
     function ($scope, $http, $modalInstance, $routeParams, Auth, PollData) {  //$location, 

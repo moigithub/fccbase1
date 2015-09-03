@@ -7,6 +7,7 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 */
+MainCtrl.$inject=['$scope', '$modal', '$http', 'Auth', '$location', '$anchorScroll'];
 angular.module('base0App')
   .controller('MainCtrl', function ($scope, $modal, $http, Auth, $location, $anchorScroll) {  
     $scope.pageTitle="All Polls";

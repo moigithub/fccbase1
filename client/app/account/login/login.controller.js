@@ -1,5 +1,6 @@
 'use strict';
 
+LoginCtrl.$inject = ['$scope', 'Auth', '$location', '$window'];
 angular.module('base0App')
   .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
     $scope.user = {};

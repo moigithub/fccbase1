@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('base0App')
-  .config(function ($routeProvider) {
+  .config(['$routeProvider',function ($routeProvider) {
     $routeProvider
       .when('/votes/viewpoll/:id', { // create new poll
         templateUrl: 'app/votes/viewpoll.html',
@@ -23,4 +23,4 @@ angular.module('base0App')
       })
 
       ;
-  });
+  }]);

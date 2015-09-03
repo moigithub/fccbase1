@@ -1,5 +1,6 @@
 'use strict';
 
+AdminCtrl.$inject=['$scope', '$http', 'Auth', 'User'];
 angular.module('base0App')
   .controller('AdminCtrl', function ($scope, $http, Auth, User) {
 

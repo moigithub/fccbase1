@@ -1,5 +1,6 @@
 'use strict';
 
+newpollVotesCtrl.$inject=['$scope', '$http', '$location', 'Auth'];
 angular.module('base0App')  
   .controller('newpollVotesCtrl', function ($scope, $http, $location, Auth) {
     $scope.placeholders = ["Pepsi", "Coca-cola"];
