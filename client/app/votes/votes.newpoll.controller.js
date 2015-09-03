@@ -1,8 +1,10 @@
 'use strict';
 
-newpollVotesCtrl.$inject=['$scope', '$http', '$location', 'Auth'];
 angular.module('base0App')  
-  .controller('newpollVotesCtrl', function ($scope, $http, $location, Auth) {
+  .controller('newpollVotesCtrl', newpollVotesCtrl);
+
+newpollVotesCtrl.$inject=['$scope', '$http', '$location', 'Auth'];
+function newpollVotesCtrl($scope, $http, $location, Auth) {
     $scope.placeholders = ["Pepsi", "Coca-cola"];
     $scope.pollOptions=[];
     $scope.pollName="";
@@ -74,4 +76,4 @@ var VotesSchema = new Schema({
 });
     */
 
-  });
+  };

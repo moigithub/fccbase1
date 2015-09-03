@@ -1,9 +1,10 @@
 'use strict';
 
-viewPollDataCtrl.$inject=['$scope', '$http', '$modalInstance', '$routeParams', 'Auth', 'PollData'];
 angular.module('base0App')  //, 
-  .controller('viewPollDataCtrl', 
-    function ($scope, $http, $modalInstance, $routeParams, Auth, PollData) {  //$location, 
+  .controller('viewPollDataCtrl', viewPollDataCtrl);
+
+viewPollDataCtrl.$inject=['$scope', '$http', '$modalInstance', '$routeParams', 'Auth', 'PollData'];
+function viewPollDataCtrl($scope, $http, $modalInstance, $routeParams, Auth, PollData) {  //$location, 
 
       $scope.poll = PollData;
 
@@ -40,9 +41,15 @@ angular.module('base0App')  //,
       //"usersVote":[{"pollOption":"22","uid":"55e7403f3eeaab9a184801e6"}]
       // if loggedIn
       if($scope.loggedIn()){
-        $scope.choice.vote = $scope.poll["usersVote"].filter(function(vote){
+        var voteSelected = $scope.poll["usersVote"].filter(function(vote){
           return vote["uid"] === $scope.getCurrentUser._id;
-        })[0]["pollOption"];
+        });
+
+        console.log(voteSelected,"voteSelected");
+
+        if(voteSelected.length>0) {
+          $scope.choice.vote=voteSelected[0]["pollOption"];
+        }
       }
 /////////// fin chart js
 
@@ -84,4 +91,4 @@ angular.module('base0App')  //,
       $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
       };
-  }); // fin controller
+  }; // fin controller

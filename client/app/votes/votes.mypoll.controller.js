@@ -7,9 +7,11 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 */
-mypollVotesCtrl.$inject=['$scope', '$http', '$modal',  '$location', 'Auth'];
 angular.module('base0App')
-  .controller('mypollVotesCtrl', function ($scope, $http, $modal,  $location, Auth) { 
+  .controller('mypollVotesCtrl', mypollVotesCtrl);
+
+mypollVotesCtrl.$inject=['$scope', '$http', '$modal',  '$location', 'Auth'];
+function mypollVotesCtrl($scope, $http, $modal,  $location, Auth) { 
     $scope.pageTitle="My Polls";
     $scope.polls=[];
     $scope.error=null;
@@ -69,4 +71,4 @@ angular.module('base0App')
           console.info('Modal dismissed at: ' + new Date());
         });
     };
-  });
+  };

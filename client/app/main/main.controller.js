@@ -7,9 +7,11 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 */
-MainCtrl.$inject=['$scope', '$modal', '$http', 'Auth', '$location', '$anchorScroll'];
 angular.module('base0App')
-  .controller('MainCtrl', function ($scope, $modal, $http, Auth, $location, $anchorScroll) {  
+  .controller('MainCtrl', MainCtrl);
+
+MainCtrl.$inject=['$scope', '$modal', '$http', 'Auth', '$location', '$anchorScroll'];
+function MainCtrl($scope, $modal, $http, Auth, $location, $anchorScroll) {  
     $scope.pageTitle="All Polls";
     $scope.polls=[];
     $scope.error=null;
@@ -63,4 +65,4 @@ console.log(dataPath);
     // empty function, not modify, placeholder when not log in, should do nothing
     // should never happen but.. whatever
     $scope.delete = function(poll){};
-  })
+  }

@@ -1,8 +1,10 @@
 'use strict';
 
-LoginCtrl.$inject = ['$scope', 'Auth', '$location', '$window'];
 angular.module('base0App')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+  .controller('LoginCtrl', LoginCtrl);
+
+LoginCtrl.$inject = ['$scope', 'Auth', '$location', '$window'];
+function LoginCtrl($scope, Auth, $location, $window) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -27,4 +29,6 @@ angular.module('base0App')
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
     };
-  });
+  };
+
+
