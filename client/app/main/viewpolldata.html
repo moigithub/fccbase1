@@ -1,0 +1,40 @@
+
+<div class="modal-header">
+	<h2>{{poll.pollName}}</h2>
+	by <h3>{{poll.createdBy.name}}</h3>
+</div>
+
+<div class="modal-body">
+	<div ng-hide="loggedIn()"><a href="/login">Login</a> to vote</div>
+
+	<div class="row">
+		<div class="col-sm-12 col-md-6 col-lg-6">
+			<div id="newPollForm">
+				<h3>Options</h3>
+				<form name="voteForm" novalidate>
+					<fieldset ng-disabled="!loggedIn()">
+						<ul>
+							<li ng-repeat="option in poll.pollOptions">
+								<label for="{{'vote_'+$index}}">{{option}}</label>
+								<input ng-model="choice.vote" id="{{'vote_'+$index}}" name="choice" type="radio" value="{{option}}">
+							</li>
+						</ul>
+						<button type="submit" ng-click="submit()" ng-disabled="validChoice()" class="btn btn-lg btn-success">Vote</button>
+					</fieldset>
+				</form>
+
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6 col-lg-6">
+			<div>
+		 		<canvas id="pie" class="chart chart-pie" data="data"
+		  labels="labels" legend="true"></canvas>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>

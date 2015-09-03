@@ -3,8 +3,12 @@
 angular.module('base0App')
   .config(function ($routeProvider) {
     $routeProvider
+      .when('/votes/viewpoll/:id', { // create new poll
+        templateUrl: 'app/votes/viewpoll.html',
+        controller: 'viewPollVotesCtrl'
+      })
       .when('/votes/mypolls', {  // only my own poll
-        templateUrl: 'app/votes/mypoll.html',
+        templateUrl: 'app/main/main.html',
         controller: 'mypollVotesCtrl',
         authenticate: true
       })
@@ -13,8 +17,8 @@ angular.module('base0App')
         controller: 'newpollVotesCtrl',
         authenticate: true
       })
-      .when('/votes/viewpoll/:id', { // create new poll
-        templateUrl: 'app/votes/viewpoll.html',
+      .when('/votes/viewpoll/:id', { // scroll to the :id poll
+        templateUrl: 'app/main/main.html',
         controller: 'viewPollVotesCtrl'
       })
 

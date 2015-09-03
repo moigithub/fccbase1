@@ -5,6 +5,7 @@
     <h1>Vote Pool</h1>
     <p class="lead">Custom vote pool with live results.</p>
     <a class ="btn btn-lg btn-success" ng-hide="loggedIn()"href="/signup">Sign up</a>
+    <a class ="btn btn-lg btn-primary" ng-hide="isPage('All Polls')" href="/">All Votes</a>
     <a class ="btn btn-lg btn-success" ng-show="loggedIn()" href="/votes/newpoll">New Poll</a>
     <a class ="btn btn-lg btn-primary" ng-show="loggedIn()" href="/votes/mypolls">My Polls</a>
   </div>
@@ -12,9 +13,20 @@
 
 <div class="container">
   <div id="poll-list">
-    <h2>All Polls</h2>
+    <h2>{{pageTitle}}</h2>
     <ul>
-      <li ng-repeat="poll in polls">{{poll.createdBy.name}} - <a href="/votes/viewpoll/{{poll._id}}">{{poll.pollName}}</a>Total Votes: {{poll.usersVote.length}}</li>
+      <li ng-repeat="poll in polls">
+       
+        <a href="#" id="{{poll._id}}" ng-click="open('lg', poll)">
+          <div>{{poll.pollName}}</div>
+          <div>{{poll.createdBy.name}}</div>
+          <div>
+            Total Votes:<span>{{poll.usersVote.length}}</span>  
+          </div>
+        </a>
+        <button class="delbtn btn btn-danger" ng-show="isPage('My Polls') && loggedIn()" ng-confirm="Are you sure?" ng-click="delete(poll)">Delete</button> 
+      
+      </li>
     </ul>
   </div>
 </div>

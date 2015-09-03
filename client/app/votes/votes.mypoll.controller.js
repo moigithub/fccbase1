@@ -8,12 +8,13 @@ router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 */
 angular.module('base0App')
-  .controller('mypollVotesCtrl', function ($scope, $http, $location, Auth) { 
+  .controller('mypollVotesCtrl', function ($scope, $http, $modal,  $location, Auth) { 
+    $scope.pageTitle="My Polls";
     $scope.polls=[];
     $scope.error=null;
 
     $scope.getCurrentUser = Auth.getCurrentUser();
-    $scope.loggedIn = Auth.isLoggedIn();
+    $scope.loggedIn = Auth.isLoggedIn;
 
    	$http.get('/api/votes/uid/' + $scope.getCurrentUser._id )
     .success(function(data){
@@ -22,6 +23,11 @@ angular.module('base0App')
     .error(function(data, status) {
         $scope.error=status;
     })
+
+    // check which page i am
+    $scope.isPage =function(page) {
+      return page === $scope.pageTitle;
+    };
 
 
     $scope.delete = function(poll){
@@ -39,4 +45,27 @@ angular.module('base0App')
         // redirect to /votes/mypoll to refresh the list ???
     }
 
+
+    // modal window
+    $scope.open = function (size, poll) {
+
+        var modalInstance = $modal.open({
+          animation: true,
+          templateUrl: 'app/main/viewpolldata.html',
+          controller: 'viewPollDataCtrl',
+          size: size,
+          resolve: {
+            PollData: function () {
+              return poll; // pass data from this controller to modal window controller
+            }
+          }
+        });
+
+        modalInstance.result.then(function (newPoll) {
+          $scope.polldata = newPoll; //this item return to/through resolve
+          console.log("newpoll", newPoll);
+        }, function () {
+          console.info('Modal dismissed at: ' + new Date());
+        });
+    };
   });

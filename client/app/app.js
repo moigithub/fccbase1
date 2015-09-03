@@ -7,7 +7,8 @@ angular.module('base0App', [
   'ngRoute',
   'ui.bootstrap',
   'chart.js',
-  'ngConfirm'
+  'ngConfirm',
+  'ngAnimate'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
