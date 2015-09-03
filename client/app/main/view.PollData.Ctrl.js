@@ -3,92 +3,97 @@
 angular.module('base0App')  //, 
   .controller('viewPollDataCtrl', viewPollDataCtrl);
 
-viewPollDataCtrl.$inject=['$scope', '$http', '$modalInstance', '$routeParams', 'Auth', 'PollData'];
-function viewPollDataCtrl($scope, $http, $modalInstance, $routeParams, Auth, PollData) {  //$location, 
+viewPollDataCtrl.$inject=['$scope', '$http', '$modalInstance', '$routeParams', '$location', 'Auth', 'PollData'];
+function viewPollDataCtrl($scope, $http, $modalInstance, $routeParams, $location, Auth, PollData) {  
 
-      $scope.poll = PollData;
+    $scope.url = $location.host()+":"+$location.port();
 
-      //console.log("pollData",PollData);
+    console.log($scope.url);
 
-      $scope.error=null;
-      $scope.choice={};
 
-      $scope.getCurrentUser = Auth.getCurrentUser();
-      $scope.loggedIn = Auth.isLoggedIn;
+    $scope.poll = PollData;
 
-      // check if user picked any option, 
-      // validate submit, not allow send empty votes
-      $scope.validChoice = function(){
-        return Object.keys($scope.choice).length<1;
-      };
+    //console.log("pollData",PollData);
 
-  ///////// chartjs
+    $scope.error=null;
+    $scope.choice={};
 
-      function calcVotes(data){
-        // for each poll Option count how many votes have
-        return data.pollOptions.map(function(option){
-          return data.usersVote.filter(function(vote){ 
-          //  console.log(vote.pollName," : ",option, vote);
-            return vote["pollOption"]===option;
-          }).length;
-        }); 
+    $scope.getCurrentUser = Auth.getCurrentUser();
+    $scope.loggedIn = Auth.isLoggedIn;
+
+    // check if user picked any option, 
+    // validate submit, not allow send empty votes
+    $scope.validChoice = function(){
+      return Object.keys($scope.choice).length<1;
+    };
+
+///////// chartjs
+
+    function calcVotes(data){
+      // for each poll Option count how many votes have
+      return data.pollOptions.map(function(option){
+        return data.usersVote.filter(function(vote){ 
+        //  console.log(vote.pollName," : ",option, vote);
+          return vote["pollOption"]===option;
+        }).length;
+      }); 
+    }
+
+    $scope.labels = $scope.poll.pollOptions;
+    $scope.data   = calcVotes($scope.poll);
+
+    // which vote is selected
+    //"usersVote":[{"pollOption":"22","uid":"55e7403f3eeaab9a184801e6"}]
+    // if loggedIn
+    if($scope.loggedIn()){
+      var voteSelected = $scope.poll["usersVote"].filter(function(vote){
+        return vote["uid"] === $scope.getCurrentUser._id;
+      });
+
+      //console.log(voteSelected,"voteSelected");
+
+      if(voteSelected.length>0) {
+        $scope.choice.vote=voteSelected[0]["pollOption"];
       }
-
-      $scope.labels = $scope.poll.pollOptions;
-      $scope.data   = calcVotes($scope.poll);
-
-      // which vote is selected
-      //"usersVote":[{"pollOption":"22","uid":"55e7403f3eeaab9a184801e6"}]
-      // if loggedIn
-      if($scope.loggedIn()){
-        var voteSelected = $scope.poll["usersVote"].filter(function(vote){
-          return vote["uid"] === $scope.getCurrentUser._id;
-        });
-
-        //console.log(voteSelected,"voteSelected");
-
-        if(voteSelected.length>0) {
-          $scope.choice.vote=voteSelected[0]["pollOption"];
-        }
-      }
+    }
 /////////// fin chart js
 
 
-      $scope.submit = function(){
-          // if el user ya voto.. cambiar voto
-          // remove user vote.. if exist, then add again
-          // aka. change vote. not allow vote twice+
-          var votes = $scope.poll["usersVote"].filter(function(userVote){
-            return userVote.uid !== $scope.getCurrentUser._id
-          });
+    $scope.submit = function(){
+        // if el user ya voto.. cambiar voto
+        // remove user vote.. if exist, then add again
+        // aka. change vote. not allow vote twice+
+        var votes = $scope.poll["usersVote"].filter(function(userVote){
+          return userVote.uid !== $scope.getCurrentUser._id
+        });
 
-          votes.push({"uid": $scope.getCurrentUser._id, "pollOption":$scope.choice.vote});
-          //console.log(votes);
+        votes.push({"uid": $scope.getCurrentUser._id, "pollOption":$scope.choice.vote});
+        //console.log(votes);
 
-          // update userVotes
-          $scope.poll["usersVote"] = votes;
+        // update userVotes
+        $scope.poll["usersVote"] = votes;
 
-          // update
-          $http.put('/api/votes/'+$scope.poll._id, {"usersVote": votes} ).
-          success(function(data, status, headers, config) {
-            // update chart data
-            $scope.data   = calcVotes(data);
-          }).
-          error(function(data, status, headers, config) {
-            //console.log("error ", status, headers);
-          });
-          
-      } // fin submit function
+        // update
+        $http.put('/api/votes/'+$scope.poll._id, {"usersVote": votes} ).
+        success(function(data, status, headers, config) {
+          // update chart data
+          $scope.data   = calcVotes(data);
+        }).
+        error(function(data, status, headers, config) {
+          //console.log("error ", status, headers);
+        });
+        
+    } // fin submit function
 
 
 
-      /// modal window buttons
-      $scope.ok = function () {
-        // return modified poll
-        $modalInstance.close($scope.poll);
-      };
+    /// modal window buttons
+    $scope.ok = function () {
+      // return modified poll
+      $modalInstance.close($scope.poll);
+    };
 
-      $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-      };
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
   }; // fin controller

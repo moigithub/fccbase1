@@ -58,3 +58,12 @@
 .box a {
     display:block;
 }
+
+.share {
+    float:left;
+    color: green;
+
+}
+.share span {
+    color: blue;
+}

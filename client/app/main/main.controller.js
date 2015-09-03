@@ -7,11 +7,13 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 */
+
+
 angular.module('base0App')
   .controller('MainCtrl', MainCtrl);
 
-MainCtrl.$inject=['$scope', '$modal', '$http', 'Auth', '$location', '$anchorScroll'];
-function MainCtrl($scope, $modal, $http, Auth, $location, $anchorScroll) {  
+MainCtrl.$inject=['$scope', '$modal', '$http', '$routeParams', '$location','Auth'];  //,  '$anchorScroll'
+function MainCtrl($scope, $modal, $http, $routeParams, $location, Auth ) {  
     $scope.pageTitle="All Polls";
     $scope.polls=[];
     $scope.error=null;
@@ -23,12 +25,6 @@ function MainCtrl($scope, $modal, $http, Auth, $location, $anchorScroll) {
     .success(function(data){
         $scope.polls=data;
 
-        var dataPath=$location.search();
-//console.log(dataPath);
-        // check if need to scroll (user wants to check x poll )
-        $location.hash(dataPath["id"]);
-        // call $anchorScroll()
-        $anchorScroll();
     })
     .error(function(data, status) {
         $scope.error=status;
@@ -65,4 +61,23 @@ function MainCtrl($scope, $modal, $http, Auth, $location, $anchorScroll) {
     // empty function, not modify, placeholder when not log in, should do nothing
     // should never happen but.. whatever
     $scope.delete = function(poll){};
+
+
+    /// view poll - share poll by id
+    var dataPath=$location.search();
+    console.log("datapath",dataPath);
+
+    if(dataPath["id"]){
+
+     $http.get('/api/votes/' + dataPath["id"])
+        .success(function(poll){
+          //show modal
+          console.log("openning ", poll);
+          $scope.open('lg', poll);
+      })
+      .error(function(data, status) {
+          $scope.error=status;
+      });
+
+    }
   }
