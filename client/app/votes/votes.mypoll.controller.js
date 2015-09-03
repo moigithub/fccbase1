@@ -38,7 +38,7 @@ function mypollVotesCtrl($scope, $http, $modal,  $location, Auth) {
         //console.log("delete pollID:",pollId);
         $http.delete('/api/votes/' + pollId)
         .success(function(res,err){
-            console.log("polls", $scope.polls);
+            //console.log("polls", $scope.polls);
             //getUserPoll(); 
             var pollLeft = $scope.polls.filter(function(poll){
                 return poll._id !== pollId;
@@ -66,9 +66,9 @@ function mypollVotesCtrl($scope, $http, $modal,  $location, Auth) {
 
         modalInstance.result.then(function (newPoll) {
           $scope.polldata = newPoll; //this item return to/through resolve
-          console.log("newpoll", newPoll);
+          //console.log("newpoll", newPoll);
         }, function () {
-          console.info('Modal dismissed at: ' + new Date());
+          //console.info('Modal dismissed at: ' + new Date());
         });
     };
   };

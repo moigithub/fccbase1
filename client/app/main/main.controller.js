@@ -24,7 +24,7 @@ function MainCtrl($scope, $modal, $http, Auth, $location, $anchorScroll) {
         $scope.polls=data;
 
         var dataPath=$location.search();
-console.log(dataPath);
+//console.log(dataPath);
         // check if need to scroll (user wants to check x poll )
         $location.hash(dataPath["id"]);
         // call $anchorScroll()
@@ -56,9 +56,9 @@ console.log(dataPath);
 
         modalInstance.result.then(function (newPoll) {
           $scope.polldata = newPoll; //this item return to/through resolve
-          console.log("newpoll", newPoll);
+          //console.log("newpoll", newPoll);
         }, function () {
-          console.info('Modal dismissed at: ' + new Date());
+          //console.info('Modal dismissed at: ' + new Date());
         });
     };
 

@@ -14,20 +14,17 @@
 <div class="container">
   <div id="poll-list">
     <h2>{{pageTitle}}</h2>
-    <ul>
-      <li ng-repeat="poll in polls">
-       
-        <a href="#" id="{{poll._id}}" ng-click="open('lg', poll)">
-          <div>{{poll.pollName}}</div>
-          <div>{{poll.createdBy.name}}</div>
-          <div>
-            Total Votes:<span>{{poll.usersVote.length}}</span>  
-          </div>
-        </a>
-        <button class="delbtn btn btn-danger" ng-show="isPage('My Polls') && loggedIn()" ng-confirm="Are you sure?" ng-click="delete(poll)">Delete</button> 
-      
-      </li>
-    </ul>
+    <div class="box" ng-repeat="poll in polls">
+      <a href="#" id="{{poll._id}}" ng-click="open('lg', poll)">
+        <h2>{{poll.pollName}}</h2>
+        <div class="by">by: {{poll.createdBy.name}}</div>
+        <div class="total">
+          Total Votes:<span>{{poll.usersVote.length}}</span>  
+        </div>
+      </a>
+      <button class="delbtn btn btn-danger" ng-show="isPage('My Polls') && loggedIn()" ng-confirm="Are you sure?" ng-click="delete(poll)">Delete</button> 
+    
+    </div>
   </div>
 </div>
 

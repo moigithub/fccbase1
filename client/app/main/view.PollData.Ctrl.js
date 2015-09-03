@@ -45,7 +45,7 @@ function viewPollDataCtrl($scope, $http, $modalInstance, $routeParams, Auth, Pol
           return vote["uid"] === $scope.getCurrentUser._id;
         });
 
-        console.log(voteSelected,"voteSelected");
+        //console.log(voteSelected,"voteSelected");
 
         if(voteSelected.length>0) {
           $scope.choice.vote=voteSelected[0]["pollOption"];
